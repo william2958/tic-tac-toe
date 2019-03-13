@@ -7,13 +7,15 @@ import { PieceComponent } from './piece/piece.component';
 import { PlayerComponent } from './player/player.component';
 import { TicComponent } from './tic/tic.component';
 import {TicService} from './services/tic.service';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         PieceComponent,
         PlayerComponent,
-        TicComponent
+        TicComponent,
+        FooterComponent
     ],
     imports: [
         BrowserModule,

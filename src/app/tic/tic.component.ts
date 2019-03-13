@@ -35,9 +35,16 @@ export class TicComponent implements OnInit {
         } else {
             if (this.turn == 1) {
                 this.pieces[pieceNumber] = this.turn;
-                let computerPick = this.generateComputerPick();
-                this.pieces[computerPick] = 2;
                 this.checkWin();
+                this.turn = 2;
+                let computerPick = this.generateComputerPick();
+                setTimeout(() => {
+                    if (this.gameover == 0) {
+                        this.pieces[computerPick] = 2;
+                        this.checkWin();
+                        this.turn = 1;
+                    }
+                }, 400);
             }
         }
     }
@@ -56,6 +63,7 @@ export class TicComponent implements OnInit {
     playerWon(winner) {
         // Winner is null is there are no wins or 0 if no player has won yet
         if (winner && winner != 0) {
+            this.turn = 0;
             if (winner == 2 && this.computer) {
                 this.gameover = 3;
             } else {
@@ -77,7 +85,6 @@ export class TicComponent implements OnInit {
             }
         }
         let chosen = possibleValues[Math.floor(Math.random() * Math.floor(possibleValues.length))];
-        console.log(chosen);
         return chosen;
     }
 

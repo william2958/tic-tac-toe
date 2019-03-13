@@ -1,21 +1,22 @@
-<div class="player" [ngClass]="{'active1': playerNumber == 1 && turn, 'active2': playerNumber == 2 && turn}">
+<div class="player" [ngClass]="{'active1': playerNumber == 1 && turn, 'active2': playerNumber == 2 && turn, 'winner': winner == playerNumber}">
 
-    <div *ngIf="playerNumber == 1 || playerNumber == 2">
-        <div class="playerLabel">
-            Player {{playerNumber}}
-            <img src="assets/player.png" alt="" class="player-icon">
-            <div *ngIf="turn" class="turn">Your turn!</div>
-            <div *ngIf="!turn" class="turn">Waiting...</div>
-        </div>
+    <div *ngIf="playerNumber == 1">
+        <span class="name">KitchenMate</span>
+        <img src="assets/tomatoe.png" alt="" class="player1-icon">
+    </div>
+
+    <div *ngIf="playerNumber == 2">
+        <span class="name">William Huang</span>
+        <img src="assets/william.jpg" alt="" class="player2-icon">
     </div>
 
     <div *ngIf="playerNumber == 3">
-        <div class="playerLabel">
-            CPU
-        </div>
+        CPU
         <img src="assets/robot.png" alt="" class="player-icon">
-        <div *ngIf="turn" class="turn">Calculating...</div>
-        <div *ngIf="!turn" class="turn">Waiting...</div>
+    </div>
+
+    <div>
+        {{generateText()}}
     </div>
 
 </div>

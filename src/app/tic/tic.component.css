@@ -34,3 +34,10 @@
     margin-top: 10px;
     text-align: center;
 }
+
+@media only screen and (max-width: 801px) and (min-width: 600px) {
+    .players {
+        margin-left: -65px;
+        margin-right: -65px;
+    }
+}

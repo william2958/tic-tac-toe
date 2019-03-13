@@ -2,24 +2,24 @@
 <div class="container">
 
     <div class="players row">
-        <div class="col s3"></div>
-        <div class="col s3 first_player">
-            <app-player [playerNumber]="1" [turn]="turn == 1"></app-player>
+        <div class="col m3 hide-on-small-only"></div>
+        <div class="col m3 s6 first_player">
+            <app-player [playerNumber]="1" [turn]="turn == 1" [winner]="gameover" [computer]="computer"></app-player>
         </div>
-        <div *ngIf="!computer" class="col s3">
-            <app-player [playerNumber]="2" [turn]="turn == 2"></app-player>
+        <div *ngIf="!computer" class="col m3 s6">
+            <app-player [playerNumber]="2" [turn]="turn == 2" [winner]="gameover" [computer]="computer"></app-player>
         </div>
-        <div *ngIf="computer" class="col s3">
-            <app-player [playerNumber]="3" [turn]="turn == 2"></app-player>
+        <div *ngIf="computer" class="col m3 s6">
+            <app-player [playerNumber]="3" [turn]="turn == 2" [winner]="gameover" [computer]="computer"></app-player>
         </div>
-        <div class="col s3"></div>
+        <div class="col m3 hide-on-small-only"></div>
     </div>
 
     <div *ngIf="gameover != 0" class="gameover">
         <div *ngIf="gameover == 1 || gameover == 2">
             <p>Congratulations! Player {{gameover}} has won the round!</p>
             <a class="waves-effect waves-light btn-small" (click)="resetGame()">Play Again</a>
-            <a *ngIf="!computer" class="waves-effect waves-light btn-small red" (click)="playCPU(true)">Play The CPU</a>
+            <a *ngIf="!computer" class="waves-effect waves-light btn-small red" (click)="playCPU(true)">Play an A.I.</a>
             <a *ngIf="computer" class="waves-effect waves-light btn-small red" (click)="playCPU(false)">Play 2 Player</a>
         </div>
         <div *ngIf="gameover == 3">
@@ -30,7 +30,7 @@
 
     <div *ngIf="gameover == 0" class="challenge">
         <p>Want a real challenge? Face the cpu!</p>
-        <a *ngIf="!computer" class="waves-effect waves-light btn-small red" (click)="playCPU(true)">Play The CPU</a>
+        <a *ngIf="!computer" class="waves-effect waves-light btn-small red" (click)="playCPU(true)">Play an A.I.</a>
         <a *ngIf="computer" class="waves-effect waves-light btn-small red" (click)="playCPU(false)">Play 2 Player</a>
     </div>
 
