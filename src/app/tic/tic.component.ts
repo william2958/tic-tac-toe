@@ -65,12 +65,14 @@ export class TicComponent implements OnInit {
     }
 
     resetGame() {
+        // Set the game variables back to their initial states
         this.pieces = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         this.turn = 1;
         this.gameover = 0;
     }
 
     checkWin() {
+        // Check if a player won, and if so, call playerWon with the winner
         let winner = this.ticService.checkWin(this.pieces.slice(0));
         this.playerWon(winner);
     }
@@ -88,19 +90,20 @@ export class TicComponent implements OnInit {
     }
 
     playCPU(computer) {
+        // Allow the user to toggle between an AI opponent or two players
         this.resetGame();
         this.computer = computer;
     }
 
     generateComputerPick() {
+        // Create a computer random pick by finding all the possible moves
         let possibleValues = [];
         for (let i=0; i<9; i++) {
             if (this.pieces[i] == 0) {
                 possibleValues.push(i);
             }
         }
-        let chosen = possibleValues[Math.floor(Math.random() * Math.floor(possibleValues.length))];
-        return chosen;
+        return possibleValues[Math.floor(Math.random() * Math.floor(possibleValues.length))];
     }
 
 }

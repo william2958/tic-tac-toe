@@ -26,7 +26,7 @@ export class PlayerComponent implements OnInit {
         } else {
             if (this.winner == WinConditions.TIE) {
                 // If it's a tie display nothing
-                return " "
+                return "Tied!"
             }
             if (this.winner && this.winner != this.playerNumber)
                 // If there is a winner and it is not this player
