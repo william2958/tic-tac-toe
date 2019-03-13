@@ -12,20 +12,21 @@ export class TicComponent implements OnInit {
         private ticService: TicService
     ) { }
 
-    // An array of the game tiles and what pieces are on them
     pieces;
     // 0 for turn will mean player 1, 1 will mean player 2 or computer
     turn;
     // will be true if the game is over
     gameover;
-    // Boolean to check if the computer is playing
     computer;
+
+    constructor() { }
 
     ngOnInit() {
         this.resetGame();
     }
 
     pieceClicked(pieceNumber) {
+        console.log(this.gameover);
         if (!this.computer) {
             this.pieces[pieceNumber] = this.turn;
             this.turn = this.turn == 1 ? 2 : 1;
@@ -37,7 +38,6 @@ export class TicComponent implements OnInit {
                 let computerPick = this.generateComputerPick();
                 this.pieces[computerPick] = 2;
                 this.checkWin();
-
             }
         }
     }
@@ -49,22 +49,13 @@ export class TicComponent implements OnInit {
     }
 
     checkWin() {
-        for (let i=0; i<3; i++) {
-            if (this.pieces[i] == this.pieces[i+3] && this.pieces[i+3] == this.pieces[i+6]) {
-                this.playerWon(this.pieces[i]);
-            } else if (this.pieces[i*3] == this.pieces[i*3+1] && this.pieces[i*3+1] == this.pieces[i*3+2]) {
-                this.playerWon(this.pieces[i*3]);
-            } else if (
-                // && has presidence over ||
-                this.pieces[0] == this.pieces[4] && this.pieces[4] == this.pieces[8] ||
-                this.pieces[2] == this.pieces[4] && this.pieces[4] == this.pieces[6]) {
-                this.playerWon(this.pieces[4]);
-            }
-        }
+        let winner = this.ticService.checkWin(this.pieces.slice(0));
+        this.playerWon(winner);
     }
 
     playerWon(winner) {
-        if (winner != 0) {
+        // Winner is null is there are no wins or 0 if no player has won yet
+        if (winner && winner != 0) {
             if (winner == 2 && this.computer) {
                 this.gameover = 3;
             } else {
@@ -85,7 +76,9 @@ export class TicComponent implements OnInit {
                 possibleValues.push(i);
             }
         }
-        return possibleValues[0];
+        let chosen = possibleValues[Math.floor(Math.random() * Math.floor(possibleValues.length))];
+        console.log(chosen);
+        return chosen;
     }
 
 }

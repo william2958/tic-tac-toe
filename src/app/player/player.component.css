@@ -10,8 +10,12 @@
     max-width: 100%;
 }
 
-.active {
+.active1 {
     background-color: lightblue;
+}
+
+.active2 {
+    background-color: lightcoral;
 }
 
 .playerLabel {

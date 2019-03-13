@@ -1,4 +1,4 @@
-<div class="player" [class.active]="turn">
+<div class="player" [ngClass]="{'active1': playerNumber == 1 && turn, 'active2': playerNumber == 2 && turn}">
 
     <div *ngIf="playerNumber == 1 || playerNumber == 2">
         <div class="playerLabel">
