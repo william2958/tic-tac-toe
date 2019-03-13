@@ -8,6 +8,14 @@ export class TicService {
     constructor() { }
 
     checkWin(pieces) {
+        // Check for tie
+        let tie = true;
+        for (let i=0; i<9; i++) {
+            if (pieces[i] == 0)
+                tie = false;
+        }
+        if (tie)
+            return 4;
         for (let i=0; i<3; i++) {
             // Check for vertical win
             if (pieces[i] == pieces[i+3] && pieces[i+3] == pieces[i+6]) {

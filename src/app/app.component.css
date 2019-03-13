@@ -12,3 +12,10 @@
     color: #1565c0;
     font-size: 3vw;
 }
+
+@media only screen and (max-width: 500px) {
+    .title-nav {
+        height: 50px;
+        padding-top: 0;
+    }
+}

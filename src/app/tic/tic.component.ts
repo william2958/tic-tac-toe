@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {TicService} from '../services/tic.service';
 
+export enum WinConditions {
+    NO_WIN = 0,
+    PLAYER1 = 1,
+    PLAYER2 = 2,
+    COMPUTER = 3,
+    TIE = 4
+}
+
 @Component({
     selector: 'app-tic',
     templateUrl: './tic.component.html',
@@ -26,25 +34,32 @@ export class TicComponent implements OnInit {
     }
 
     pieceClicked(pieceNumber) {
-        console.log(this.gameover);
+
+        if (this.pieces[pieceNumber] != 0)
+            return;
+
         if (!this.computer) {
+            // Set the chosen piece
             this.pieces[pieceNumber] = this.turn;
+            // Toggle the player turn
             this.turn = this.turn == 1 ? 2 : 1;
 
             this.checkWin();
         } else {
+            // Only if it is the players turn
+            // (player cannot double click a tile while computer is calculating)
             if (this.turn == 1) {
                 this.pieces[pieceNumber] = this.turn;
                 this.checkWin();
-                this.turn = 2;
-                let computerPick = this.generateComputerPick();
-                setTimeout(() => {
-                    if (this.gameover == 0) {
+                if (this.gameover == 0) {
+                    this.turn = 2;
+                    let computerPick = this.generateComputerPick();
+                    setTimeout(() => {
                         this.pieces[computerPick] = 2;
-                        this.checkWin();
                         this.turn = 1;
-                    }
-                }, 400);
+                        this.checkWin();
+                    }, 400);
+                }
             }
         }
     }
@@ -65,7 +80,7 @@ export class TicComponent implements OnInit {
         if (winner && winner != 0) {
             this.turn = 0;
             if (winner == 2 && this.computer) {
-                this.gameover = 3;
+                this.gameover = WinConditions.COMPUTER;
             } else {
                 this.gameover = winner;
             }

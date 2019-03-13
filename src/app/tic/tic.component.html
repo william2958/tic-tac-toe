@@ -26,10 +26,15 @@
             <p>The CPU has beaten you! The robot uprising has truly begun.</p>
             <a class="waves-effect waves-light btn-small" (click)="resetGame()">Play Again</a>
         </div>
+        <div *ngIf="gameover == 4">
+            <p>It's a tie!</p>
+            <a class="waves-effect waves-light btn-small" (click)="resetGame()">Play Again</a>
+        </div>
     </div>
 
     <div *ngIf="gameover == 0" class="challenge">
-        <p>Want a real challenge? Face the cpu!</p>
+        <p *ngIf="!computer">Want a real challenge? Face the our A.I.!</p>
+        <p *ngIf="computer">Computer too hard? Switch back to William!</p>
         <a *ngIf="!computer" class="waves-effect waves-light btn-small red" (click)="playCPU(true)">Play an A.I.</a>
         <a *ngIf="computer" class="waves-effect waves-light btn-small red" (click)="playCPU(false)">Play 2 Player</a>
     </div>
