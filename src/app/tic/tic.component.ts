@@ -18,22 +18,34 @@ export class TicComponent implements OnInit {
     turn;
     // will be true if the game is over
     gameover;
+    // Boolean to check if the computer is playing
+    computer;
 
     ngOnInit() {
         this.resetGame();
     }
 
     pieceClicked(pieceNumber) {
-        this.pieces[pieceNumber] = this.turn;
-        this.turn = this.turn == 1 ? 2 : 1;
+        if (!this.computer) {
+            this.pieces[pieceNumber] = this.turn;
+            this.turn = this.turn == 1 ? 2 : 1;
 
-        this.checkWin();
+            this.checkWin();
+        } else {
+            if (this.turn == 1) {
+                this.pieces[pieceNumber] = this.turn;
+                let computerPick = this.generateComputerPick();
+                this.pieces[computerPick] = 2;
+                this.checkWin();
+
+            }
+        }
     }
 
     resetGame() {
         this.pieces = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         this.turn = 1;
-        this.gameover = 1;
+        this.gameover = 0;
     }
 
     checkWin() {
@@ -53,9 +65,27 @@ export class TicComponent implements OnInit {
 
     playerWon(winner) {
         if (winner != 0) {
-            console.log("The winner is: ", winner);
-            this.gameover = winner;
+            if (winner == 2 && this.computer) {
+                this.gameover = 3;
+            } else {
+                this.gameover = winner;
+            }
         }
+    }
+
+    playCPU(computer) {
+        this.resetGame();
+        this.computer = computer;
+    }
+
+    generateComputerPick() {
+        let possibleValues = [];
+        for (let i=0; i<9; i++) {
+            if (this.pieces[i] == 0) {
+                possibleValues.push(i);
+            }
+        }
+        return possibleValues[0];
     }
 
 }

@@ -8,10 +8,10 @@
 
 .piece-row {
     width: 300px;
+    border: 3px solid black;
 }
 
 .piece {
-    background-color: blue;
     border: 1px solid black;
     height: 100px;
 }
@@ -23,4 +23,14 @@
 .gameover {
     text-align: center;
     margin-top: 15px;
+}
+
+.gameover a {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.challenge {
+    margin-top: 10px;
+    text-align: center;
 }

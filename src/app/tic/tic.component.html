@@ -6,8 +6,11 @@
         <div class="col s3 first_player">
             <app-player [playerNumber]="1" [turn]="turn == 1"></app-player>
         </div>
-        <div class="col s3">
+        <div *ngIf="!computer" class="col s3">
             <app-player [playerNumber]="2" [turn]="turn == 2"></app-player>
+        </div>
+        <div *ngIf="computer" class="col s3">
+            <app-player [playerNumber]="3" [turn]="turn == 2"></app-player>
         </div>
         <div class="col s3"></div>
     </div>
@@ -16,7 +19,19 @@
         <div *ngIf="gameover == 1 || gameover == 2">
             <p>Congratulations! Player {{gameover}} has won the round!</p>
             <a class="waves-effect waves-light btn-small" (click)="resetGame()">Play Again</a>
+            <a *ngIf="!computer" class="waves-effect waves-light btn-small red" (click)="playCPU(true)">Play The CPU</a>
+            <a *ngIf="computer" class="waves-effect waves-light btn-small red" (click)="playCPU(false)">Play 2 Player</a>
         </div>
+        <div *ngIf="gameover == 3">
+            <p>The CPU has beaten you! The robot uprising has truly begun.</p>
+            <a class="waves-effect waves-light btn-small" (click)="resetGame()">Play Again</a>
+        </div>
+    </div>
+
+    <div *ngIf="gameover == 0" class="challenge">
+        <p>Want a real challenge? Face the cpu!</p>
+        <a *ngIf="!computer" class="waves-effect waves-light btn-small red" (click)="playCPU(true)">Play The CPU</a>
+        <a *ngIf="computer" class="waves-effect waves-light btn-small red" (click)="playCPU(false)">Play 2 Player</a>
     </div>
 
     <div class="grid">
