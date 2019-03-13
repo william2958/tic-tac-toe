@@ -1,0 +1,14 @@
+.title-nav {
+    background-color: #fff;
+    height: 80px;
+    padding-top: 10px;
+}
+.responsive {
+    width: 25%;
+    height: auto;
+    padding-right: 1vw;
+}
+.logo {
+    color: #1565c0;
+    font-size: 3vw;
+}

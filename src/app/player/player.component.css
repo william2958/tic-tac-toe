@@ -1,0 +1,23 @@
+.player {
+    border: 1px solid black;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+}
+
+.player-icon {
+    max-width: 100%;
+}
+
+.active {
+    background-color: lightblue;
+}
+
+.playerLabel {
+    text-align: center;
+}
+
+.turn {
+    text-align: center;
+}
