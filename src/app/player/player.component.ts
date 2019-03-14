@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WinConditions} from '../tic/tic.component';
+import {WinConditions} from '../tic/conditions';
 
 @Component({
     selector: 'app-player',

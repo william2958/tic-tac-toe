@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {WinConditions} from '../tic/tic.component';
+import {WinConditions} from '../tic/conditions';
 
 @Injectable()
 

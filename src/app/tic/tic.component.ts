@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TicService} from '../services/tic.service';
-
-export enum WinConditions {
-    NO_WIN = 0,
-    PLAYER1 = 1,
-    PLAYER2 = 2,
-    COMPUTER = 3,
-    TIE = 4
-}
+import {WinConditions} from './conditions';
 
 @Component({
     selector: 'app-tic',
@@ -26,7 +19,7 @@ export class TicComponent implements OnInit {
     // will be true if the game is over
     gameState;
     isComputer;
-    
+
     ngOnInit() {
         this.resetGame();
     }
