@@ -26,9 +26,7 @@ export class TicComponent implements OnInit {
     // will be true if the game is over
     gameState;
     isComputer;
-
-    constructor() { }
-
+    
     ngOnInit() {
         this.resetGame();
     }
