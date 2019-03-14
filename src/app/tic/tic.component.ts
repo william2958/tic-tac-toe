@@ -22,10 +22,10 @@ export class TicComponent implements OnInit {
 
     pieces;
     // 0 for turn will mean player 1, 1 will mean player 2 or computer
-    turn;
+    currentPlayer;
     // will be true if the game is over
-    gameover;
-    computer;
+    gameState;
+    isComputer;
 
     constructor() { }
 
@@ -33,31 +33,31 @@ export class TicComponent implements OnInit {
         this.resetGame();
     }
 
-    pieceClicked(pieceNumber) {
+    setPiece(pieceNumber) {
 
         if (this.pieces[pieceNumber] != 0)
             return;
 
-        if (!this.computer) {
+        if (!this.isComputer) {
             // Set the chosen piece
-            this.pieces[pieceNumber] = this.turn;
+            this.pieces[pieceNumber] = this.currentPlayer;
             // Toggle the player turn
-            this.turn = this.turn == 1 ? 2 : 1;
+            this.currentPlayer = this.currentPlayer == 1 ? 2 : 1;
 
-            this.checkWin();
+            this.playerWon();
         } else {
             // Only if it is the players turn
             // (player cannot double click a tile while computer is calculating)
-            if (this.turn == 1) {
-                this.pieces[pieceNumber] = this.turn;
-                this.checkWin();
-                if (this.gameover == 0) {
-                    this.turn = 2;
+            if (this.currentPlayer == 1) {
+                this.pieces[pieceNumber] = this.currentPlayer;
+                this.playerWon();
+                if (this.gameState == 0) {
+                    this.currentPlayer = 2;
                     let computerPick = this.generateComputerPick();
                     setTimeout(() => {
                         this.pieces[computerPick] = 2;
-                        this.turn = 1;
-                        this.checkWin();
+                        this.currentPlayer = 1;
+                        this.playerWon();
                     }, 400);
                 }
             }
@@ -67,24 +67,20 @@ export class TicComponent implements OnInit {
     resetGame() {
         // Set the game variables back to their initial states
         this.pieces = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-        this.turn = 1;
-        this.gameover = 0;
+        this.currentPlayer = 1;
+        this.gameState = 0;
     }
 
-    checkWin() {
+    playerWon() {
         // Check if a player won, and if so, call playerWon with the winner
-        let winner = this.ticService.checkWin(this.pieces.slice(0));
-        this.playerWon(winner);
-    }
-
-    playerWon(winner) {
+        let winner = this.ticService.getWinner(this.pieces.slice(0));
         // Winner is null is there are no wins or 0 if no player has won yet
         if (winner && winner != 0) {
-            this.turn = 0;
-            if (winner == 2 && this.computer) {
-                this.gameover = WinConditions.COMPUTER;
+            this.currentPlayer = 0;
+            if (winner == 2 && this.isComputer) {
+                this.gameState = WinConditions.COMPUTER;
             } else {
-                this.gameover = winner;
+                this.gameState = winner;
             }
         }
     }
@@ -92,7 +88,7 @@ export class TicComponent implements OnInit {
     playCPU(computer) {
         // Allow the user to toggle between an AI opponent or two players
         this.resetGame();
-        this.computer = computer;
+        this.isComputer = computer;
     }
 
     generateComputerPick() {

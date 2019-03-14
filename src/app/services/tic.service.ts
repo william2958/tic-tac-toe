@@ -9,7 +9,7 @@ export class TicService {
     constructor() { }
 
     // See if a player has won the game by checking a 9 length array of game pieces
-    checkWin(pieces) {
+    getWinner(pieces) {
         // Check for tie
         let tie = true;
         for (let i=0; i<9; i++) {
